@@ -60,13 +60,29 @@ jobs:
       - uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.android }}
-          script: ./gradlew connectedCheck --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME"
           emulator-options: >-
             -no-boot-anim -no-audio -no-snapshot -no-window -camera-back none
             -camera-front none -gpu swiftshader_indirect
-      - uses: codecov/codecov-action@v1
-        with:
-          flags: android,ui_tests
+          script: |
+            ./gradlew connectedCheck --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME"
+            adb -e shell screencap /sdcard/screen.png
+            adb -e pull /sdcard/screen.png
+      - name: Commit and push results to temp branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BRANCH_NAME="temp_branch_${{github.run_id}}"
+          git fetch
+          git checkout -b $BRANCH_NAME
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "record snapshots"
+          git push --set-upstream origin $BRANCH_NAME
+
+#      - uses: codecov/codecov-action@v1
+#        with:
+#          flags: android,ui_tests
 
 #  play-store-release: # not using cache action for releases
 #    name: Play Store Release
