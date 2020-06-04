@@ -10,6 +10,7 @@ buildscript {
 apply plugin: 'kotlin'
 apply plugin: 'application'
 
+tasks.run.workingDir = rootProject.projectDir
 mainClassName = "io.ktor.samples.clientmultipart.MultipartAppKt"
 
 sourceSets {
@@ -32,4 +33,3 @@ dependencies {
     compile "io.ktor:ktor-html-builder:$ktor_version"
     compile "ch.qos.logback:logback-classic:1.2.3"
 }
-
