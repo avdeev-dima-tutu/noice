@@ -3,19 +3,6 @@ on:
   push:
     branches:
       - master
-      - "[0-9]+.[0-9]+.x"
-    tags:
-      - "[0-9]+.[0-9]+.[0-9]+"
-    paths-ignore:
-      - "fastlane/**"
-      - "*.md"
-  pull_request:
-    branches:
-      - master
-      - "[0-9]+.[0-9]+.x"
-    paths-ignore:
-      - "fastlane/**"
-      - "*.md"
 
 env:
   GRADLE_HOME: ${{ github.workspace }}/gradle-home
@@ -23,7 +10,7 @@ env:
 jobs:
   assemble:
     name: Assemble
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v2
@@ -37,7 +24,7 @@ jobs:
           key: gradle-${{ hashFiles('**/*.gradle*') }}-${{ github.sha }}
           restore-keys: |
             gradle-${{ hashFiles('**/*.gradle*') }}-
-      - run: ./gradlew assembleDebug --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME"
+      - run: ./gradlew app:assembleDebug app:assembleDebugAndroidTest --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME"
 
   ui-tests:
     name: UI tests

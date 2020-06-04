@@ -1,5 +1,6 @@
 package com.github.ashutoshgngwr.noice.fragment
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import androidx.fragment.app.testing.FragmentScenario
@@ -15,6 +16,11 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.github.ashutoshgngwr.noice.R
 import com.github.ashutoshgngwr.noice.RetryTestRule
+import com.test.ui_test_core.snapshot.Snapshot
+import com.test.ui_test_core.snapshot.expectSnapshot
+import com.test.ui_test_core.snapshot.snapshot
+import com.test.ui_test_core.utils.findActivity
+import com.test.ui_test_core.utils.wait
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -23,36 +29,20 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class AboutFragmentTest {
 
-  @Rule
-  @JvmField
-  val retryTestRule = RetryTestRule(5)
+    @Rule
+    @JvmField
+    val retryTestRule = RetryTestRule(5)
 
-  private lateinit var fragmentScenario: FragmentScenario<AboutFragment>
-
-  @Before
-  fun setup() {
-    fragmentScenario = launchFragmentInContainer<AboutFragment>()
-  }
-
-  @Test
-  fun testAboutItemClick() {
-    Intents.init()
-
-    // can't test everything. Picking one item at random
-    onView(withChild(withText(R.string.app_copyright))).perform(click())
-    intended(
-      filterEquals(
-        Intent(
-          Intent.ACTION_VIEW,
-          Uri.parse(
-            InstrumentationRegistry.getInstrumentation()
-              .targetContext
-              .getString(R.string.app_license_url)
-          )
-        )
-      )
-    )
-
-    Intents.release()
-  }
+    @Test
+    fun testAboutItemClick() {
+        launchFragmentInContainer<AboutFragment>()
+        Intents.init()
+        // can't test everything. Picking one item at random
+        onView(withChild(withText(R.string.app_name))).perform(click())
+        val snapshot = com.test.ui_test_core.utils.wait {
+            findActivity<Activity>()
+        }.snapshot()
+        snapshot.byteArray
+        println("snapshot")
+    }
 }
