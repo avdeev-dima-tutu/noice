@@ -24,3 +24,8 @@ allprojects {
 task clean(type: Delete) {
   delete rootProject.buildDir
 }
+
+task testSnashot() {
+    dependsOn(":server:run")
+    finalizedBy(":app:connectedCheck")
+}
