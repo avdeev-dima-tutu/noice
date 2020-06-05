@@ -1,6 +1,8 @@
 package io.ktor.samples.clientmultipart
 
 import io.ktor.application.*
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.apache.Apache
 import io.ktor.http.content.*
 import io.ktor.request.*
 import io.ktor.response.*
@@ -53,3 +55,9 @@ suspend fun main(args: Array<String>) {
     sendMultipart()//todo delete
 }
 
+suspend fun sendMultipart(uploadServer: String = "http://127.0.0.1:8080", name:String = "file.bin", fileBytes: ByteArray = byteArrayOf(1, 2, 3, 4)): String =
+HttpClient(Apache).sendMultipart(
+    uploadServer = uploadServer,
+    name = name,
+    fileBytes = fileBytes
+)

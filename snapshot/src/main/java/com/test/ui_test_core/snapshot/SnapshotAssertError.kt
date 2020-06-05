@@ -4,6 +4,9 @@ import android.app.Activity
 import android.view.View
 import com.test.ui_test_core.utils.toBitmap
 import com.test.ui_test_core.utils.toBytesAndRecycle
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.android.Android
+import ru.tutu.snapshot.upload.sendMultipart
 
 class SnapshotAssertError internal constructor(pngName: String, description: String)
     : AssertionError("Expected snapshot differ ./androidTest/resources/$pngName; $description")
@@ -29,3 +32,12 @@ fun Activity.snapshot() = window.decorView.snapshot()
 
 fun View.snapshot() =
         Snapshot(toBitmap().toBytesAndRecycle())
+
+//todo move
+suspend fun sendMultipart(uploadServer: String = "http://127.0.0.1:8080", name:String = "file.bin", fileBytes: ByteArray = byteArrayOf(1, 2, 3, 4)): String {
+    return HttpClient(Android).sendMultipart(
+        uploadServer = uploadServer,
+        name = name,
+        fileBytes = fileBytes
+    )
+}

@@ -18,6 +18,7 @@ import com.github.ashutoshgngwr.noice.R
 import com.github.ashutoshgngwr.noice.RetryTestRule
 import com.test.ui_test_core.snapshot.Snapshot
 import com.test.ui_test_core.snapshot.expectSnapshot
+import com.test.ui_test_core.snapshot.sendMultipart
 import com.test.ui_test_core.snapshot.snapshot
 import com.test.ui_test_core.utils.findActivity
 import com.test.ui_test_core.utils.wait
@@ -31,9 +32,9 @@ import ru.tutu.snapshot.upload.sendMultipart
 @RunWith(AndroidJUnit4::class)
 class AboutFragmentTest {
 
-    @Rule
-    @JvmField
-    val retryTestRule = RetryTestRule(5)
+//    @Rule
+//    @JvmField
+//    val retryTestRule = RetryTestRule(5)
 
     @Test
     fun testAboutItemClick() {
@@ -44,8 +45,10 @@ class AboutFragmentTest {
         val snapshot = com.test.ui_test_core.utils.wait {
             findActivity<Activity>()
         }.snapshot()
+        println("fghj")
         runBlocking {
-            sendMultipart("10.0.2.2:8080", "snapshot.png", snapshot.byteArray)
+            println("fghj")
+            sendMultipart("http://10.0.2.2:8080", "snapshot.png", snapshot.byteArray)
         }
         println("snapshot")
     }
