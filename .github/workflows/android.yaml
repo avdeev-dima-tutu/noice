@@ -51,7 +51,7 @@ jobs:
             -no-boot-anim -no-audio -no-snapshot -no-window -camera-back none
             -camera-front none -gpu swiftshader_indirect
           script: |
-            ./gradlew testSnashot --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME"
+            ./gradlew testSnapshot --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME"
 #            adb -e shell screencap /sdcard/screen.png
 #            adb -e pull /sdcard/screen.png
       - name: Commit and push results to temp branch
