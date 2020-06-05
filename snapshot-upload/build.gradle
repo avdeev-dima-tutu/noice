@@ -1,0 +1,14 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    def ktor_version = "1.3.2"
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+//    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.72"
+    implementation "io.ktor:ktor-client-apache:$ktor_version"
+
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"
