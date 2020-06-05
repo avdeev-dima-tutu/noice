@@ -21,10 +21,12 @@ import com.test.ui_test_core.snapshot.expectSnapshot
 import com.test.ui_test_core.snapshot.snapshot
 import com.test.ui_test_core.utils.findActivity
 import com.test.ui_test_core.utils.wait
+import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import ru.tutu.snapshot.upload.sendMultipart
 
 @RunWith(AndroidJUnit4::class)
 class AboutFragmentTest {
@@ -42,7 +44,9 @@ class AboutFragmentTest {
         val snapshot = com.test.ui_test_core.utils.wait {
             findActivity<Activity>()
         }.snapshot()
-        snapshot.byteArray
+        runBlocking {
+            sendMultipart("10.0.2.2:8080", "snapshot.png", snapshot.byteArray)
+        }
         println("snapshot")
     }
 }
