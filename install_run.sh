@@ -7,6 +7,7 @@ adb install $APK
 adb install $TEST_APK
 
 #run
+chmod 777 ./build-artifacts/snapshot-server -R
 ./build-artifacts/snapshot-server/bin/app &
 #todo error if server not exists
 adb shell am instrument -w -r -e class 'com.github.ashutoshgngwr.noice.fragment.AboutFragmentTest#testAboutItemClick' com.github.ashutoshgngwr.noice.debug.test/androidx.test.runner.AndroidJUnitRunner
