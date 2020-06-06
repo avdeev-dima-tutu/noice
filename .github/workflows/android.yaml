@@ -45,9 +45,9 @@ jobs:
             -camera-front none -gpu swiftshader_indirect
           script: |
             ./install_run.sh
-      #            ./gradlew connectedCheck --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME"
-      #            adb -e shell screencap /sdcard/screen.png
-      #            adb -e pull /sdcard/screen.png
+#            ./gradlew connectedCheck --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME"
+#            adb -e shell screencap /sdcard/screen.png
+#            adb -e pull /sdcard/screen.png
       - name: Commit and push results to temp branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
