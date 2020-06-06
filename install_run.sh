@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 #install
-APK="artifacts/app-debug.apk"
-TEST_APK="artifacts/app-debug-androidTest.apk"
+APK="apk-artifacts/app-debug.apk"
+TEST_APK="apk-artifacts/app-debug-androidTest.apk"
 adb install $APK
 adb install $TEST_APK
 
