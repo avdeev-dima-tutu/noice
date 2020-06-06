@@ -61,7 +61,12 @@ jobs:
           git add .
           git commit -m "record snapshots"
           git push --set-upstream origin $BRANCH_NAME
-
+      - uses: tutu-ru-mobile/action_create_pull_request@tag0.2
+        with:
+          access_token: "${{ secrets.GITHUB_TOKEN }}"
+          branch_from: "temp_branch_${{github.run_id}}"
+          branch_to: "${{ github.ref }}" #github.head_ref for PR
+          title: "Record snapshot"
 #      - uses: codecov/codecov-action@v1
 #        with:
 #          flags: android,ui_tests
