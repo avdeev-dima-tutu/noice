@@ -75,4 +75,4 @@ lint/reports/
 gradle-home
 */gradle-home
 
-./build-artifacts
+build-artifacts
