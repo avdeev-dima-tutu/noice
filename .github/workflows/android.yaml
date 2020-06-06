@@ -39,7 +39,7 @@ jobs:
           path: build-artifacts
       - uses: reactivecircus/android-emulator-runner@v2
         with:
-          profile: android-27
+          profile: pixel
           api-level: ${{ matrix.android }}
           emulator-options: >-
             -no-boot-anim -no-audio -no-snapshot -no-window -camera-back none
