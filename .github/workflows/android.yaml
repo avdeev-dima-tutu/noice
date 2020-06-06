@@ -29,7 +29,7 @@ jobs:
     strategy:
       matrix:
         # test on minimum supported and last three version
-        android: [28] #21, 27, 28, 29
+        android: [27] #21, 27, 28, 29
       fail-fast: false
     steps:
       - uses: actions/checkout@v2
@@ -39,10 +39,11 @@ jobs:
           path: build-artifacts
       - uses: reactivecircus/android-emulator-runner@v2
         with:
+          profile: android-27
           api-level: ${{ matrix.android }}
           emulator-options: >-
             -no-boot-anim -no-audio -no-snapshot -no-window -camera-back none
-            -camera-front none -gpu swiftshader_indirect
+            -camera-front none -gpu swiftshader_indirect -skin 1080x1920 -dpi-device 420
           script: |
             ./install_run.sh
 #            ./gradlew connectedCheck --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME"
