@@ -16,7 +16,12 @@ import ru.tutu.snapshot.upload.sendMultipart
 import java.io.File
 
 suspend fun main(args: Array<String>) {
-    embeddedServer(Netty, port = 8080) {
+    embeddedServer(Netty, port = 8080,configure = {
+        //конфигурация может быть специфичная для Netty или CIO
+    connectionGroupSize
+    workerGroupSize
+    callGroupSize
+    }) {
         routing {
             post("/upload") {
                 val multipart = call.receiveMultipart()

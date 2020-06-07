@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.70"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.72"
     }
 }
 
@@ -15,13 +15,6 @@ application {
 tasks.run.workingDir = rootProject.projectDir
 mainClassName = "io.ktor.samples.clientmultipart.MultipartAppKt"
 
-sourceSets {
-    main.kotlin.srcDirs = ['src']
-    main.resources.srcDirs = ['resources']
-    test.kotlin.srcDirs = ['test']
-    test.resources.srcDirs = ['testresources']
-}
-
 repositories {
     jcenter()
     maven { url "https://dl.bintray.com/kotlin/ktor" }
@@ -32,8 +25,6 @@ dependencies {
     implementation(project(":snapshot-upload"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.72")
     implementation("io.ktor:ktor-server-netty:$ktor_version")
-//    implementation("ch.qos.logback:logback-classic:1.2.3")
-    implementation("org.slf4j:slf4j-simple:1.7.28")
-//    compile "io.ktor:ktor-html-builder:$ktor_version"
+    implementation("ch.qos.logback:logback-classic:1.2.3")
     implementation "io.ktor:ktor-client-apache:$ktor_version"
 }
