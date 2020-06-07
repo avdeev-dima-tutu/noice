@@ -24,7 +24,7 @@ suspend fun main(args: Array<String>) {
     }) {
         routing {
             get("/") {
-                call.respondText { "save snapshot server" }
+                call.respondText { "record snapshot server" }
             }
             post("/upload") {
                 val multipart = call.receiveMultipart()
