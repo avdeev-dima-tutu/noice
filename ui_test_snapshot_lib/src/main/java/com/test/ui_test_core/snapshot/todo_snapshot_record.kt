@@ -5,6 +5,8 @@ import io.ktor.client.engine.android.Android
 import kotlinx.coroutines.runBlocking
 import ru.tutu.snapshot.upload.sendMultipart
 
+const val RECORD = true//todo
+
 fun assertSnapshot2(gradleModuleDir: String, expect: ExpectSnapshotData, actual: Snapshot, description: String = "") {
     runBlocking {
         HttpClient(Android).use { httpClient ->
@@ -15,5 +17,11 @@ fun assertSnapshot2(gradleModuleDir: String, expect: ExpectSnapshotData, actual:
             )
         }
     }
-    assertSnapshot(expect, actual, description)
+    try {
+        assertSnapshot(expect, actual, description)
+    } catch (t: Throwable) {
+        if (!RECORD) {
+            throw t
+        }
+    }
 }
