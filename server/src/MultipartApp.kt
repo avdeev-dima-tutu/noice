@@ -16,7 +16,7 @@ import ru.tutu.snapshot.upload.sendMultipart
 import java.io.File
 
 suspend fun main(args: Array<String>) {
-    embeddedServer(Netty, port = 8082) {
+    embeddedServer(Netty, port = 8080) {
         routing {
             post("/upload") {
                 val multipart = call.receiveMultipart()
@@ -55,7 +55,7 @@ suspend fun main(args: Array<String>) {
     sendMultipart()//todo delete
 }
 
-suspend fun sendMultipart(uploadServer: String = "http://127.0.0.1:8082", name:String = "file.bin", fileBytes: ByteArray = byteArrayOf(1, 2, 3, 4)): String =
+suspend fun sendMultipart(uploadServer: String = "http://127.0.0.1:8080", name:String = "file.bin", fileBytes: ByteArray = byteArrayOf(1, 2, 3, 4)): String =
 HttpClient(Apache).sendMultipart(
     uploadServer = uploadServer,
     name = name,
