@@ -5,13 +5,11 @@ import io.ktor.client.engine.android.Android
 import kotlinx.coroutines.runBlocking
 import ru.tutu.snapshot.upload.sendMultipart
 
-fun assertSnapshot2(expect: ExpectSnapshotData, actual: Snapshot, description: String = "") {
+fun assertSnapshot2(gradleModuleDir:String, expect: ExpectSnapshotData, actual: Snapshot, description: String = "") {
     runBlocking {
-        val modulePath = "app"//todo provide in gradle
-
         sendMultipart(
             uploadServer = "http://10.0.2.2:8080",
-            name = "$modulePath/src/androidTest/resources/${expect.pngName}",
+            name = "$gradleModuleDir/src/androidTest/resources/${expect.pngName}",
             fileBytes = actual.byteArray
         )
     }

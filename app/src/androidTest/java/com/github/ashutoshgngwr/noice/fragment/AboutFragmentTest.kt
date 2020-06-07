@@ -40,6 +40,7 @@ class AboutFragmentTest {
         // can't test everything. Picking one item at random
         onView(withChild(withText(R.string.app_name))).perform(click())
         assertSnapshot2(
+            "app",
             expectSnapshot("dir/expect_snap.png"),
             com.test.ui_test_core.utils.wait {
                 findActivity<Activity>()
