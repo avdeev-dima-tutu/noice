@@ -9,10 +9,8 @@ import android.media.AudioManager
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
-import android.os.SystemClock
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.github.ashutoshgngwr.noice.fragment.SleepTimerFragment
 import com.github.ashutoshgngwr.noice.sound.PlaybackControlEvents
 import com.github.ashutoshgngwr.noice.sound.PlaybackManager
 import org.greenrobot.eventbus.EventBus
@@ -140,13 +138,6 @@ class MediaPlayerService : Service() {
     }
   }
 
-  @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-  fun scheduleAutoStop(event: SleepTimerFragment.ScheduleAutoSleepEvent) {
-    handler.removeCallbacks(autoStopCallback)
-    if (event.atUptimeMillis > SystemClock.uptimeMillis()) {
-      handler.postAtTime(autoStopCallback, event.atUptimeMillis)
-    }
-  }
 
 
   private fun createNotificationChannel() {
