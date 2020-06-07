@@ -23,6 +23,9 @@ suspend fun main(args: Array<String>) {
     callGroupSize
     }) {
         routing {
+            get("/") {
+                call.respondText { "save snapshot server" }
+            }
             post("/upload") {
                 val multipart = call.receiveMultipart()
                 multipart.forEachPart { part ->
