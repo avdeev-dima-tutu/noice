@@ -1,4 +1,4 @@
 include ':temp_app'
-include ':ui_test_snapshot_lib'
-include ':ui_test_snapshot_server'
-include ':tutu_upload_file'
+include ':snapshot'
+include ':snapshot-server'
+include ':snapshot-upload'

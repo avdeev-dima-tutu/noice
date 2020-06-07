@@ -26,7 +26,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":tutu_upload_file"))
+    implementation(project(":snapshot-upload"))
     def ktor_version = "1.3.2"//todo
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
