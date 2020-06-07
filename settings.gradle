@@ -1,4 +1,4 @@
 include ':ui_test_snapshot_sample_app'
 include ':ui_test_snapshot_lib'
-include ':ui_test_snhp-server'
+include ':ui_test_snapshot_server'
 include ':tutu_upload_file'
