@@ -11,7 +11,7 @@ fun assertSnapshot2(expect: ExpectSnapshotData, actual: Snapshot, description: S
 
         sendMultipart(
             uploadServer = "http://10.0.2.2:8080",
-            name = "$modulePath/androidTest/resources/${expect.pngName}",
+            name = "$modulePath/src/androidTest/resources/${expect.pngName}",
             fileBytes = actual.byteArray
         )
     }

@@ -30,6 +30,6 @@ internal inline fun <reified T> T.getSnapshotFromResources(pngName: String): Byt
 internal fun Snapshot.saveOnAndroidStorage(fileName: String) {
     val file = Environment.getExternalStorageDirectory().resolve(fileName)
     file.parentFile.mkdirs()
-    file.createNewFile()
-    file.writeBytes(byteArray)
+//    file.createNewFile()//todo
+//    file.writeBytes(byteArray)
 }
