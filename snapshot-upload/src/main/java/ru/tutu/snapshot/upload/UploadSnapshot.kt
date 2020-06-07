@@ -1,31 +1,34 @@
 package ru.tutu.snapshot.upload
 
-import io.ktor.client.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
+import io.ktor.client.HttpClient
+import io.ktor.client.request.post
+import io.ktor.client.statement.HttpResponse
 import io.ktor.http.*
 import io.ktor.http.content.OutgoingContent
 import io.ktor.util.flattenEntries
 import io.ktor.utils.io.ByteWriteChannel
+import io.ktor.utils.io.readRemaining
+import io.ktor.utils.io.writeFully
 import io.ktor.utils.io.writeStringUtf8
 import java.util.*
-import io.ktor.utils.io.*
 
-suspend fun HttpClient.sendMultipart(uploadServer: String = "http://127.0.0.1:8080", name:String = "file.bin", fileBytes: ByteArray = byteArrayOf(1, 2, 3, 4)): String {
-    val result =post<HttpResponse>("$uploadServer/upload") {
-        val buildBody = MultiPartContent.build {
-            add("user", "myuser")
-            add("password", "password")
-            add("file", fileBytes, filename = name)
+suspend fun HttpClient.sendMultipart(
+    uploadUrl: String,
+    filePath: String,
+    fileBytes: ByteArray
+): String {
+    val response = post<HttpResponse>("$uploadUrl/upload") {
+        body = MultiPartContent.build {
+            add("file", fileBytes, filename = filePath)
         }
-        body = buildBody
     }
-    return result.content.readRemaining().readText()
+    return response.content.readRemaining().readText()
 }
 
-class MultiPartContent(val parts: List<Part>) : OutgoingContent.WriteChannelContent() {
-    val uuid = UUID.randomUUID()
-    val boundary = "***ktor-$uuid-ktor-${System.currentTimeMillis()}***"
+//Copy from https://github.com/ktorio/ktor-samples/blob/e929446c911037f52f6d99776edb9edc7c6b5e32/other/client-multipart/src/MultipartApp.kt
+class MultiPartContent(private val parts: List<Part>) : OutgoingContent.WriteChannelContent() {
+    private val uuid: UUID = UUID.randomUUID()
+    private val boundary = "***ktor-$uuid-ktor-${System.currentTimeMillis()}***"
 
     data class Part(
         val name: String,
@@ -57,7 +60,7 @@ class MultiPartContent(val parts: List<Part>) : OutgoingContent.WriteChannelCont
         .withCharset(Charsets.UTF_8)
 
     class Builder {
-        val parts = arrayListOf<Part>()
+        private val parts = arrayListOf<Part>()
 
         fun add(part: Part) {
             parts += part

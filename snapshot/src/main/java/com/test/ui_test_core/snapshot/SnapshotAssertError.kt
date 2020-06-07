@@ -4,9 +4,6 @@ import android.app.Activity
 import android.view.View
 import com.test.ui_test_core.utils.toBitmap
 import com.test.ui_test_core.utils.toBytesAndRecycle
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.android.Android
-import ru.tutu.snapshot.upload.sendMultipart
 
 class SnapshotAssertError internal constructor(pngName: String, description: String)
     : AssertionError("Expected snapshot differ ./androidTest/resources/$pngName; $description")
