@@ -53,6 +53,33 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     // setup listener for navigation item clicks
     navigation_drawer.setNavigationItemSelectedListener(this)
 
+    // bind navigation drawer menu items checked state with fragment back stack
+    supportFragmentManager.addOnBackStackChangedListener {
+      when (
+        supportFragmentManager
+          .getBackStackEntryAt(supportFragmentManager.backStackEntryCount - 1)
+          .name
+        ) {
+        SoundLibraryFragment::class.java.simpleName -> {
+          navigation_drawer.setCheckedItem(R.id.library)
+        }
+        PresetFragment::class.java.simpleName -> {
+          navigation_drawer.setCheckedItem(R.id.saved_presets)
+        }
+        SleepTimerFragment::class.java.simpleName -> {
+          navigation_drawer.setCheckedItem(R.id.sleep_timer)
+        }
+        AboutFragment::class.java.simpleName -> {
+          navigation_drawer.setCheckedItem(R.id.about)
+        }
+      }
+    }
+
+    // set sound library fragment when activity is created initially
+    if (savedInstanceState == null) {
+      setFragment(SoundLibraryFragment::class.java)
+    }
+
     // volume control to type "media"
     volumeControlStream = AudioManager.STREAM_MUSIC
   }
@@ -82,6 +109,60 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
   }
 
   override fun onNavigationItemSelected(item: MenuItem): Boolean {
+    when (item.itemId) {
+      R.id.library -> {
+        setFragment(SoundLibraryFragment::class.java)
+      }
+      R.id.saved_presets -> {
+        setFragment(PresetFragment::class.java)
+      }
+      R.id.sleep_timer -> {
+        setFragment(SleepTimerFragment::class.java)
+      }
+      R.id.app_theme -> {
+        DialogFragment().show(supportFragmentManager) {
+          title(R.string.app_theme)
+          singleChoiceItems(
+            itemsRes = R.array.app_themes,
+            currentChoice = getAppTheme(),
+            onItemSelected = { setAppTheme(it) }
+          )
+        }
+      }
+      R.id.about -> {
+        setFragment(AboutFragment::class.java)
+      }
+      R.id.report_issue -> {
+        startActivity(
+          Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse(getString(R.string.app_issues_url))
+          )
+        )
+      }
+      R.id.rate_on_play_store -> {
+        try {
+          startActivity(
+            Intent(
+              Intent.ACTION_VIEW,
+              Uri.parse("market://details?id=$packageName")
+            ).addFlags(
+              Intent.FLAG_ACTIVITY_NO_HISTORY
+                or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
+                or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+            )
+          )
+        } catch (e: ActivityNotFoundException) {
+          Log.i(TAG, "Play store is not installed on the device", e)
+        }
+      }
+    }
+
+    // hack to avoid stuttering in animations
+    layout_main.postDelayed({
+      layout_main.closeDrawer(GravityCompat.START)
+    }, 150)
+
     return true
   }
 
