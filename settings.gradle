@@ -1,4 +1,4 @@
 include ':temp_app'
 include ':snapshot'
-include ':server'
+include ':snapshot-server'
 include ':snapshot-upload'
