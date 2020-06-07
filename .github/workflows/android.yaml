@@ -44,7 +44,6 @@ jobs:
           emulator-options: >-
             -no-boot-anim -no-audio -no-snapshot -no-window -camera-back none
             -camera-front none -gpu swiftshader_indirect -skin 1080x1920 -dpi-device 420
-            -change-locale ru
           script: |
             ./install_run.sh
 #            ./gradlew connectedCheck --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME"
