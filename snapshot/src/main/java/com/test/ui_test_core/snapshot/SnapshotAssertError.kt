@@ -33,11 +33,3 @@ fun Activity.snapshot() = window.decorView.snapshot()
 fun View.snapshot() =
         Snapshot(toBitmap().toBytesAndRecycle())
 
-//todo move
-suspend fun sendMultipart(uploadServer: String = "http://127.0.0.1:8080", name:String = "file.bin", fileBytes: ByteArray = byteArrayOf(1, 2, 3, 4)): String {
-    return HttpClient(Android).sendMultipart(
-        uploadServer = uploadServer,
-        name = name,
-        fileBytes = fileBytes
-    )
-}

@@ -16,10 +16,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.github.ashutoshgngwr.noice.R
 import com.github.ashutoshgngwr.noice.RetryTestRule
-import com.test.ui_test_core.snapshot.Snapshot
-import com.test.ui_test_core.snapshot.expectSnapshot
-import com.test.ui_test_core.snapshot.sendMultipart
-import com.test.ui_test_core.snapshot.snapshot
+import com.test.ui_test_core.snapshot.*
 import com.test.ui_test_core.utils.findActivity
 import com.test.ui_test_core.utils.wait
 import kotlinx.coroutines.runBlocking
@@ -42,14 +39,11 @@ class AboutFragmentTest {
         Intents.init()
         // can't test everything. Picking one item at random
         onView(withChild(withText(R.string.app_name))).perform(click())
-        val snapshot = com.test.ui_test_core.utils.wait {
-            findActivity<Activity>()
-        }.snapshot()
-        println("fghj")
-        runBlocking {
-            println("fghj")
-            sendMultipart("http://10.0.2.2:8080", "snapshot.png", snapshot.byteArray)
-        }
-        println("snapshot")
+        assertSnapshot2(
+            expectSnapshot("dir/expect_snap.png"),
+            com.test.ui_test_core.utils.wait {
+                findActivity<Activity>()
+            }.snapshot()
+        )
     }
 }

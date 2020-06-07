@@ -11,7 +11,7 @@ import io.ktor.utils.io.writeStringUtf8
 import java.util.*
 import io.ktor.utils.io.*
 
-suspend fun HttpClient.sendMultipart(uploadServer: String = "http://127.0.0.1:8080", name:String = "file.bin", fileBytes: ByteArray = byteArrayOf(1, 2, 3, 4)): String {
+suspend fun HttpClient.sendMultipart(uploadServer: String = "http://127.0.0.1:9001", name:String = "file.bin", fileBytes: ByteArray = byteArrayOf(1, 2, 3, 4)): String {
     val result =post<HttpResponse>("$uploadServer/upload") {
         val buildBody = MultiPartContent.build {
             add("user", "myuser")
