@@ -6,41 +6,41 @@ adb shell settings put global animator_duration_scale 0
 
 #Костыль для включения русского языка. Работате на девайсе -skin 1080x1920 -dpi-device 420 api 27
 
-sleep 2
+sleep 4
 
 echo "открываем системную настройку языка"
 adb shell am start -a android.settings.LOCALE_SETTINGS
 
-sleep 2
+sleep 3
 
 echo "Нажимаем кнопку add new language"
 adb shell input tap 500 500
 
-sleep 2
+sleep 3
 
 echo "Нажиамаем на лупу поиска"
 adb shell input tap 1060 80
 
-sleep 2
+sleep 3
 
 echo "Вводим в поиск текст Russian"
 adb shell input text Russian
 
-sleep 2
+sleep 3
 
 echo "Click on русский"
 adb shell input tap 1 350
 
-sleep 2
+sleep 3
 
 echo "Click on Россия"
 adb shell input tap 1 400
 
-sleep 2
+sleep 3
 
 echo "swipe russian language up"
 adb shell input swipe 1000 500 1000 300 500
 
-sleep 2
+sleep 3
 echo "Всё, русский язык включен"
 
