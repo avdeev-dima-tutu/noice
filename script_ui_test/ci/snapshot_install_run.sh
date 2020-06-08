@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-./script_ui_test/ci/prepare_emulator.sh
 adb shell getprop #print emulator props
+./script_ui_test/ci/prepare_emulator.sh
 
 #install apk's
 APK="build-artifacts/ui_test_snapshot_sample_app-debug.apk"
