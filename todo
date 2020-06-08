@@ -16,3 +16,6 @@ adb shell getprop status.battery.level_raw
 
 
 $ANDROID_HOME/emulator/emulator -avd Pixel_2_API_28 -shell -wipe-data -no-snapshot -nocache -noaudio -no-boot-anim -selinux disabled -verbose
+
+https://habr.com/en/company/redmadrobot/blog/412551/
+https://androidp1.ru/ispolzovanie-komandy-adb-shell-input-tap-i-shell-input-swipe/
