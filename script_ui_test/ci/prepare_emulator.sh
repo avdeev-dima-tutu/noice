@@ -4,9 +4,9 @@ adb shell settings put global window_animation_scale 0
 adb shell settings put global transition_animation_scale 0
 adb shell settings put global animator_duration_scale 0
 
-#Костыль для включения русского языка. Работате на девайсе -skin 1080x1920 -dpi-device 420 api 27
+#Костыль для включения русского языка. Работает на девайсе -skin 1080x1920 -dpi-device 420 api 27
 
-sleep 4
+sleep 5
 
 echo "открываем системную настройку языка"
 adb shell am start -a android.settings.LOCALE_SETTINGS
@@ -41,6 +41,6 @@ sleep 3
 echo "swipe russian language up"
 adb shell input swipe 1000 500 1000 300 500
 
-sleep 3
+sleep 1
 echo "Всё, русский язык включен"
 
