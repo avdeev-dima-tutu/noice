@@ -1,0 +1,18 @@
+https://gist.github.com/mrk-han/66ac1a724456cadf1c93f4218c6060ae
+https://developer.android.com/studio/command-line/avdmanager?hl=ru
+https://developer.android.com/studio/run/emulator-commandline?hl=ru
+
+$ANDROID_HOME/emulator/emulator -help
+
+$ANDROID_HOME/emulator/emulator -list-avds
+
+$ANDROID_HOME/emulator/emulator -avd Pixel_2_API_28 -shell -wipe-data -no-snapshot -nocache -noaudio -no-boot-anim -selinux disabled -verbose
+
+$ANDROID_HOME/tools/bin/avdmanager list
+
+emulator-options: "-no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -skin 1080x1920"
+
+adb shell getprop status.battery.level_raw
+
+
+$ANDROID_HOME/emulator/emulator -avd Pixel_2_API_28 -shell -wipe-data -no-snapshot -nocache -noaudio -no-boot-anim -selinux disabled -verbose

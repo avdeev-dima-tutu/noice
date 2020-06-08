@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 adb shell getprop
-
+./prepare_emulator.sh
 #install
 APK="build-artifacts/ui_test_snapshot_sample_app-debug.apk"
 TEST_APK="build-artifacts/ui_test_snapshot_sample_app-debug-androidTest.apk"
