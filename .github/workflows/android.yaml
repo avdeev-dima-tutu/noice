@@ -23,7 +23,7 @@ jobs:
     name: UI tests
     needs: build-job
     runs-on: macos-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     strategy:
       matrix:
         # test on minimum supported and last three version
